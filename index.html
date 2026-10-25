@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information System</title>
+    <!--para mag connect sa style.css nga file-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="{{ url_for('index') }}" class="navbar-brand">STUDENT ENROLLED</a>
+        <div>
+            <a href="{{ url_for('logout') }}" class="btn btn-delete">Logout</a>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        
+        <div class="page-header">
+            <div class="page-title">
+                <h1>Student Directory</h1>
+                <p>Manage enrolled students and view database records</p>
+                <div class="stat-badge">Total Enrolled: {{ total_students }}</div>
+            </div>
+            <div>
+                <a href="{{ url_for('add_student') }}" class="btn btn-primary">+ Add New Student</a>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Student ID</th>
+                        <th>Full Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Course</th>
+                        <th>Year Level</th>
+                        <th>Contact</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td><strong>{{ student.student_id }}</strong></td>
+                        <td>{{ student.fullname }}</td>
+                        <td>{{ student.age if student.age else '-' }}</td>
+                        <td>{{ student.gender }}</td>
+                        <td>{{ student.course }}</td>
+                        <td>{{ student.year_level }}</td>
+                        <td>{{ student.contact if student.contact else '-' }}</td>
+                        <td>
+                            <div class="actions-cell">
+                                <a href="{{ url_for('edit_student', id=student.id) }}" class="btn btn-edit">Edit</a>
+                                <a href="{{ url_for('delete_student', id=student.id) }}" class="btn btn-delete">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="9" style="text-align: center; padding: 24px;">No records for database.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</html>

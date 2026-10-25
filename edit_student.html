@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <!-- Background overlay: buhinan anr brigghtnessn para mas clear ang picture -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <! nav: kun pinduton ma sayllo sa "STUDENT ENROLLED AND EDIT" nga page -->
+        <a href="{{ url_for('index') }}" class="navbar-brand">STUDENT ENROLLED AND EDIT</a>
+        <div>
+            <a href="{{ url_for('logout') }}" class="btn btn-delete">Logout</a>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        
+        <div class="page-header">
+            <div class="page-title">
+                <h1>Edit Student Information</h1>
+                <p>Update student details for {{ student.fullname }}</p>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <form action="{{ url_for('edit_student', id=student.id) }}" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Student ID *</label>
+                        <input type="text" name="student_id" value="{{ student.student_id }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" name="fullname" value="{{ student.fullname }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Age</label>
+                        <input type="number" name="age" value="{{ student.age }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select name="gender">
+                            <option value="Male" {% if student.gender == 'Male' %}selected{% endif %}>Male</option>
+                            <option value="Female" {% if student.gender == 'Female' %}selected{% endif %}>Female</option>
+                            <option value="Other" {% if student.gender == 'Other' %}selected{% endif %}>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Year Level</label>
+                        <select name="year_level">
+                            <option value="1st Year" {% if student.year_level == '1st Year' %}selected{% endif %}>1st Year</option>
+                            <option value="2nd Year" {% if student.year_level == '2nd Year' %}selected{% endif %}>2nd Year</option>
+                            <option value="3rd Year" {% if student.year_level == '3rd Year' %}selected{% endif %}>3rd Year</option>
+                            <option value="4th Year" {% if student.year_level == '4th Year' %}selected{% endif %}>4th Year</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Course</label>
+                        <input type="text" name="course" value="{{ student.course }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="text" name="contact" value="{{ student.contact }}">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Complete Address</label>
+                        <input type="text" name="address" value="{{ student.address }}">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <!-- form action: kun pinduton ma update kag cancel->
+                    <button type="submit" class="btn btn-primary">Update Changes</button>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>

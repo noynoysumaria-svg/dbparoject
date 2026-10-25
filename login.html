@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login - Student System</title>
+    <!--para mag connect sa style.css nga file-->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <!-- Background overlay: buhinan ang brigghtness para mas clear ang picture -->
+    <div
+      class="login-wrapper"
+      style="background-image: linear-gradient(rgba(11, 15, 25, 0.35), rgba(11, 15, 25, 0.35)), url('{{ url_for('static', filename='profille.jpg') }}');"
+    >
+      <div class="login-card">
+        <div class="login-header">
+          <h2>Admin log in</h2>
+          <p>Please log in to manage and see student records</p>
+        </div>
+
+        {% if error %}
+        <div class="alert-error">{{ error }}</div>
+        {% endif %}
+
+        <form action="{{ url_for('login') }}" method="POST">
+          <div class="form-group" style="margin-bottom: 16px">
+            <label>Username</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter username"
+              required
+              autofocus
+            />
+          </div>
+
+          <div class="form-group" style="margin-bottom: 24px">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">
+            Sign In
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
